@@ -23,7 +23,7 @@ from pygame.locals import *
 pygame.init()
 
 #Set up the display
-screen_width, screen_height = 1000, 700
+screen_width, screen_height = 1300, 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Binary Racer")
 
@@ -38,25 +38,21 @@ pygame.display.set_caption("Binary Racer")
 
 # text_to_be_displayed = 'fortnite'
 
-
-
-class UI:
-  def __init__(self, image, scale, text = '')  :
-    self.sprite = pygame.transform.scale(pygame.image.load("images/"+image),scale)
+class button:
+  def __init__(self,x, y, image)  :
+   
     self.image = image
-    self.rect = self.sprite.get_rect()
-    self.text = text
-    self.notif = ""
-    self.notif2 = ''
+    self.rect = self.image.get_rect()
+   
+    self.rect.topleft = (x,y)
+  
 
 
   
 
 
-  def displayUI(self):
-    self.rect.x = 0
-    self.rect.y = 0
-    screen.blit(self.sprite , self.rect)  # blit using the rectangle
+  def draw(self):
+    screen.blit(self.image , (self.rect.x,self.rect.y))  # blit using the rectangle
     
     
 
@@ -70,15 +66,15 @@ class UI:
       pygame.quit()
       sys.exit()
 
-    
-
+image = pygame.image.load('images/1red.png').convert_alpha()
+buttontest = button(0,0,image)
   
 # text_rect = text_surface.get_rect()  # get bounding rectangle
 # text_rect.center = (x, y)  # set the center of the rectangle
 # screen.blit(text_surface, text_rect)  # blit using the rectangle
     
 
-testui = UI(image = 'a.png', scale = (1000, 700))
+#testui = UI(image = 'a.png', scale = (1000, 700))
 # ui = UI(image = 'GeneralUI.png', type="main", scale = (1000, 300))
 # hp1 = UI(image = 'HPBarSelf.png', scale = (200, 20))
 # hp1background = UI(image = 'HPBackground.png', scale = (200, 20))
@@ -101,7 +97,7 @@ testui = UI(image = 'a.png', scale = (1000, 700))
 # screen.blit(titlescreen.sprite, titlescreen.rect)
 
 pygame.display.flip()
-time.sleep(10)
+
 while True:
     screen.fill((0, 0, 0))
     for event in pygame.event.get():
@@ -125,5 +121,5 @@ while True:
     
     
     
-    testui.displayUI()
+    buttontest.draw()
     pygame.display.flip()
