@@ -58,13 +58,13 @@ class button:
         if(self.type == 'num' and change == False):
           if 'red' in self.name:
             self.name = 'green'
-            img = pygame.image.load('images/'+str(self.num)+'green.png').convert_alpha()
+            img = pygame.image.load('sourcecode/images/'+str(self.num)+'green.png').convert_alpha()
             self.image = img
             change = True  
             
           if 'green' in self.name and change == False:
             self.name = 'red'
-            img = pygame.image.load('images/'+str(self.num)+'red.png').convert_alpha()
+            img = pygame.image.load('sourcecode/images/'+str(self.num)+'red.png').convert_alpha()
             self.image = img
             change = True  
             
@@ -90,22 +90,22 @@ class button:
       pygame.quit()
       sys.exit()
 #loading images
-red1 = pygame.image.load('images/1red.png').convert_alpha()
-red2 = pygame.image.load('images/2red.png').convert_alpha()
-red4 = pygame.image.load('images/4red.png').convert_alpha()
-red8 = pygame.image.load('images/8red.png').convert_alpha()
-red16 = pygame.image.load('images/16red.png').convert_alpha()
-red32 = pygame.image.load('images/32red.png').convert_alpha()
-red64 = pygame.image.load('images/64red.png').convert_alpha()
-red128 = pygame.image.load('images/128red.png').convert_alpha()
-green1 = pygame.image.load('images/1green.png').convert_alpha()
-green2 = pygame.image.load('images/2green.png').convert_alpha()
-green4 = pygame.image.load('images/4green.png').convert_alpha()
-green8 = pygame.image.load('images/8green.png').convert_alpha()
-green16 = pygame.image.load('images/16green.png').convert_alpha()
-green32 = pygame.image.load('images/32green.png').convert_alpha()
-green64 = pygame.image.load('images/64green.png').convert_alpha()
-green128 = pygame.image.load('images/128green.png').convert_alpha()
+red1 = pygame.image.load('sourcecode/images/1red.png').convert_alpha()
+red2 = pygame.image.load('sourcecode/images/2red.png').convert_alpha()
+red4 = pygame.image.load('sourcecode/images/4red.png').convert_alpha()
+red8 = pygame.image.load('sourcecode/images/8red.png').convert_alpha()
+red16 = pygame.image.load('sourcecode/images/16red.png').convert_alpha()
+red32 = pygame.image.load('sourcecode/images/32red.png').convert_alpha()
+red64 = pygame.image.load('sourcecode/images/64red.png').convert_alpha()
+red128 = pygame.image.load('sourcecode/images/128red.png').convert_alpha()
+green1 = pygame.image.load('sourcecode/images/1green.png').convert_alpha()
+green2 = pygame.image.load('sourcecode/images/2green.png').convert_alpha()
+green4 = pygame.image.load('sourcecode/images/4green.png').convert_alpha()
+green8 = pygame.image.load('sourcecode/images/8green.png').convert_alpha()
+green16 = pygame.image.load('sourcecode/images/16green.png').convert_alpha()
+green32 = pygame.image.load('sourcecode/images/32green.png').convert_alpha()
+green64 = pygame.image.load('sourcecode/images/64green.png').convert_alpha()
+green128 = pygame.image.load('sourcecode/images/128green.png').convert_alpha()
 #initializing button objects
 button1 = button(1000,500,red1,1,'num',1,'red')
 button2 = button(875,507,red2,1,'num',2,'red')
@@ -117,12 +117,12 @@ button64 = button(250,507,red64,1,'num',64,'red')
 button128 = button(125,507,red128,1,'num',128,'red')
 
 
-bquiz = pygame.image.load('images/bquiz.png').convert_alpha()
-hquiz = pygame.image.load('images/hquiz.png').convert_alpha()
+bquiz = pygame.image.load('sourcecode/images/bquiz.png').convert_alpha()
+hquiz = pygame.image.load('sourcecode/images/hquiz.png').convert_alpha()
 buttonbquiz = button(525,300,bquiz,1,'binaryquiz',0,'none')
 buttonhquiz = button(465,450,hquiz,1,'hexquiz',0,'none')
 
-submit = pygame.image.load('images/submit.png').convert_alpha()
+submit = pygame.image.load('sourcecode/images/submit.png').convert_alpha()
 buttonsubmit = button(575,600,submit,1,'submit',0,'none')
 
 class image:
@@ -135,8 +135,8 @@ class image:
     self.x = x
     self.y = y
     
-equals = pygame.image.load('images/equals.png').convert_alpha()
-plus = pygame.image.load('images/plus.png').convert_alpha()
+equals = pygame.image.load('sourcecode/images/equals.png').convert_alpha()
+plus = pygame.image.load('sourcecode/images/plus.png').convert_alpha()
 
 equalsign = image(1075,510,equals,1)
 plus1 = image(190,510,plus,1)
