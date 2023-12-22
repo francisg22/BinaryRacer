@@ -27,16 +27,7 @@ screen_width, screen_height = 1300, 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Binary Racer")
 
-#Load the image sprite
-#sprite_image = pygame.transform.scale(pygame.image.load("images/EagleSprite.jpg"),(100,100))
-#sprite_rect = sprite_image.get_rect()
-#sprite_speed = 5
 
-#Set the initial position of the sprite
-#sprite_rect.x = screen_width // 2 - sprite_rect.width // 2
-#sprite_rect.y = screen_height // 2 - sprite_rect.height // 2
-
-# text_to_be_displayed = 'fortnite'
 
 class button:
   def __init__(self,x, y, image,scale,type,num,col)  :
@@ -76,8 +67,15 @@ class button:
             img = pygame.image.load('images/'+str(self.num)+'red.png').convert_alpha()
             self.image = img
             change = True  
-            print('hit')
+            
           screen.blit(self.image , (self.rect.x,self.rect.y))
+        elif(self.type == 'binaryquiz'):
+          self.clicked = True
+        elif(self.type  == 'hexquiz'):
+          self.clicked = True
+        elif(self.type  == 'submit'):
+           return True
+      
       if pygame.mouse.get_pressed()[0] == 0:
         self.clicked = False
         
@@ -91,7 +89,7 @@ class button:
                #run
       pygame.quit()
       sys.exit()
-
+#loading images
 red1 = pygame.image.load('images/1red.png').convert_alpha()
 red2 = pygame.image.load('images/2red.png').convert_alpha()
 red4 = pygame.image.load('images/4red.png').convert_alpha()
@@ -108,6 +106,7 @@ green16 = pygame.image.load('images/16green.png').convert_alpha()
 green32 = pygame.image.load('images/32green.png').convert_alpha()
 green64 = pygame.image.load('images/64green.png').convert_alpha()
 green128 = pygame.image.load('images/128green.png').convert_alpha()
+#initializing button objects
 button1 = button(1000,500,red1,1,'num',1,'red')
 button2 = button(875,507,red2,1,'num',2,'red')
 button4 = button(750,507,red4,1,'num',4,'red')
@@ -117,20 +116,14 @@ button32 = button(375,507,red32,1,'num',32,'red')
 button64 = button(250,507,red64,1,'num',64,'red')
 button128 = button(125,507,red128,1,'num',128,'red')
 
-# text_rect = text_surface.get_rect()  # get bounding rectangle
-# text_rect.center = (x, y)  # set the center of the rectangle
-# screen.blit(text_surface, text_rect)  # blit using the rectangle
-    
 
-#testui = UI(image = 'a.png', scale = (1000, 700))
-# ui = UI(image = 'GeneralUI.png', type="main", scale = (1000, 300))
-# hp1 = UI(image = 'HPBarSelf.png', scale = (200, 20))
-# hp1background = UI(image = 'HPBackground.png', scale = (200, 20))
-# hp2 = UI(image = 'HPBarOther.png', scale = (200, 20))
-# hp2background = UI(image = 'HPBackground.png', scale = (200, 20))
-# ArenaBackground = UI(image = 'Background.png', scale = (1000, 700))
-# titlescreen = UI(image = 'MainMenu.png', scale = (1000,1000))
-# pokeball = UI(image = 'ESD_Pokeball.png', scale = (1000,1000))
+bquiz = pygame.image.load('images/bquiz.png').convert_alpha()
+hquiz = pygame.image.load('images/hquiz.png').convert_alpha()
+buttonbquiz = button(525,300,bquiz,1,'binaryquiz',0,'none')
+buttonhquiz = button(465,450,hquiz,1,'hexquiz',0,'none')
+
+submit = pygame.image.load('images/submit.png').convert_alpha()
+buttonsubmit = button(575,600,submit,1,'submit',0,'none')
 
 class image:
   def __init__(self,x, y, image, scale)  :
@@ -158,7 +151,6 @@ plus8 = image(700,0,plus,1)
 
 
 
-#plus1 sign
 
 
 
@@ -173,24 +165,19 @@ def sum(list):
 
 font = pygame.font.Font('freesansbold.ttf', 32)
  
-# create a text surface object,
-# on which text is drawn on it.
-text = font.render('256', True, (0, 255, 0))
- 
-# create a rectangular object for the
-# text surface object
 
  
-# set the center of the rectangular object.
 
  
 
 
-# screen.blit(pokeball.sprite, pokeball.rect)
-# screen.blit(titlescreen.sprite, titlescreen.rect)
+
 
 pygame.display.flip()
-
+screenloc = 'menu'
+firsttime = -1
+num = -1
+totalright = 0
 while True:
     screen.fill((38, 4, 84))
     for event in pygame.event.get():
@@ -204,38 +191,113 @@ while True:
           mouse_presses = pygame.mouse.get_pressed()
           if mouse_presses[0]:
             pos = pygame.mouse.get_pos()
-            print(pos)
+            
             
             
        
 
     
-       
     
-    #displaying plus and equals
-    screen.blit(equalsign.image, equalsign.rect)
-    screen.blit(plus1.image, plus1.rect)
-    screen.blit(plus2.image, plus2.rect)
-    screen.blit(plus3.image, plus3.rect)
-    screen.blit(plus4.image, plus4.rect)
-    screen.blit(plus5.image, plus5.rect)
-    screen.blit(plus6.image, plus6.rect)
-    screen.blit(plus7.image, plus7.rect)
     
-    #displaying buttons
-    button1.draw()
-    button2.draw()
-    button4.draw() 
-    button8.draw()
-    button16.draw()
-    button32.draw()
-    button64.draw()
-    button128.draw()
-    #taking the total and displaying it
-    total = sum([button1,button2,button4,button8,button16,button32,button64,button128])
-    text = font.render(str(total), True, (0, 255, 0))
-    textRect = text.get_rect()
-    textRect.center = (1200 , 540 )
-    screen.blit(text, textRect)
+    if(screenloc == 'menu'):
+      text = font.render('BINARY RACER (Aplha)', True, (0, 255, 0))
+      textRect = text.get_rect()
+      textRect.center = (650 , 150 )
+      screen.blit(text, textRect)
+
+      buttonbquiz.draw()
+      buttonhquiz.draw()
+      if(buttonbquiz.clicked):
+        screenloc = 'bquiz'
+        firsttime = 1
+      elif(buttonhquiz.clicked):
+        screenloc = 'hquiz'
+        firsttime = 1
+        
+      
+
+    
+
+      
+    
+    else:
+      if(screenloc == 'bquiz'):
+        
+        if(firsttime == 1):
+          rand = random.randrange(0, 256)
+          num = str(rand)
+          firsttime = 0
+          print(num)
+          
+        if(firsttime == 0):
+          pass
+        
+        if(buttonsubmit.draw()):
+          if(rand == total):
+            totalright +=1
+            firsttime = 1  
+          elif(num != total):
+           
+            print('loss')
+            firsttime = 1 
+            totalright = 0
+        
+        
+      elif(screenloc == 'hquiz'):
+        if(firsttime == 1):
+          rand = random.randrange(0, 256)
+          num = str(hex(rand))[2:]
+          firsttime = 0
+          print(rand)
+          
+        if(firsttime == 0):
+          pass
+        
+        if(buttonsubmit.draw()):
+          if(rand == total):
+            totalright +=1
+            firsttime = 1  
+          elif(num != total):
+           
+            print('loss')
+            firsttime = 1 
+            totalright = 0
+
+      #displaying plus and equals
+      screen.blit(equalsign.image, equalsign.rect)
+      screen.blit(plus1.image, plus1.rect)
+      screen.blit(plus2.image, plus2.rect)
+      screen.blit(plus3.image, plus3.rect)
+      screen.blit(plus4.image, plus4.rect)
+      screen.blit(plus5.image, plus5.rect)
+      screen.blit(plus6.image, plus6.rect)
+      screen.blit(plus7.image, plus7.rect)
+    
+      #displaying buttons
+      button1.draw()
+      button2.draw()
+      button4.draw() 
+      button8.draw()
+      button16.draw()
+      button32.draw()
+      button64.draw()
+      button128.draw()
+      buttonsubmit.draw()
+      #taking the total and displaying it
+      total = sum([button1,button2,button4,button8,button16,button32,button64,button128])
+      text = font.render(str(total), True, (0, 255, 0))
+      textRect = text.get_rect()
+      textRect.center = (1200 , 540 )
+      screen.blit(text, textRect)
+
+      text = font.render("Number right: " + str(totalright), True, (0, 255, 0))
+      textRect = text.get_rect()
+      textRect.center = (650 , 400 )
+      screen.blit(text, textRect)
+
+      text = font.render(num, True, (0, 255, 0))
+      textRect = text.get_rect()
+      textRect.center = (650 , 300 )
+      screen.blit(text, textRect)
 
     pygame.display.flip()
